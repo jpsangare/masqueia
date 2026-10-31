@@ -28,7 +28,7 @@ The extension processes the following data **locally on your computer only**:
 
 ### 1. Text Processing
 - **What:** Text you paste (Ctrl+V) into web forms
-- **Where:** Processed by local backend at `http://localhost:6677`
+- **Where:** Processed by local backend at `http://localhost:7000`
 - **Why:** To detect and anonymize personally identifiable information (PII)
 - **Retention:** Temporary - processed in memory, not stored permanently
 
@@ -56,7 +56,7 @@ Your Computer Only - No External Servers!
 
 1. You paste text →
 2. Extension reads pasted text →
-3. Sends to YOUR local backend (localhost:6677) →
+3. Sends to YOUR local backend (localhost:7000) →
 4. Microsoft Presidio library (running on YOUR computer) detects PII →
 5. Anonymized text returned →
 6. Extension pastes anonymized text
@@ -66,7 +66,7 @@ ALL PROCESSING HAPPENS ON YOUR MACHINE!
 
 ### No External Communication
 
-- ✅ Backend runs at `http://localhost:6677` (your computer)
+- ✅ Backend runs at `http://localhost:7000` (your computer)
 - ✅ All processing is local
 - ✅ No data sent to our servers (we don't even have servers!)
 - ✅ No cloud services used
@@ -86,7 +86,7 @@ The extension requests the following permissions:
 ### `clipboardRead`
 **Why:** Read pasted text when you press Ctrl+V to anonymize it
 **When:** Only when you actively paste text
-**Data sent:** Only to YOUR local backend (localhost:6677)
+**Data sent:** Only to YOUR local backend (localhost:7000)
 
 ### `activeTab`
 **Why:** Access current webpage to paste anonymized text

@@ -2,7 +2,7 @@
 importScripts('locales.js');
 
 // Le moteur n'accepte que l'origine de cette extension (ID fixé par "key" dans le manifeste)
-const ENGINE_URL = 'http://localhost:6677/api';
+const ENGINE_URL = 'http://localhost:7000/api';
 const ENGINE_TIMEOUT_MS = 60000;
 // Conversion Docling : premier chargement des modèles, OCR des PDF scannés
 const FILE_TIMEOUT_MS = 10 * 60000;

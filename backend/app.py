@@ -24,7 +24,7 @@ sys.path.insert(0, str(backend_dir))
 # Évite le chargement de torch par Presidio (démarrage nettement plus rapide)
 os.environ.setdefault('PRESIDIO_DEVICE', 'cpu')
 
-PORT = int(os.environ.get('PRESIDIO_PORT', '6677'))
+PORT = int(os.environ.get('PRESIDIO_PORT', '7000'))
 # Mode développement : autorise l'interface servie en HTTP par ce serveur et les outils (curl)
 DEV_MODE = os.environ.get('MASQUEIA_DEV') == '1'
 EXTENSION_DIR = backend_dir.parent / 'chrome-extension'

@@ -10,7 +10,7 @@ setlocal EnableExtensions
 title Presidio Anonymizer
 cd /d "%~dp0"
 
-set "PORT=6677"
+set "PORT=7000"
 set "VENV_PY=%~dp0backend\.venv\Scripts\python.exe"
 set "MARKER=%~dp0backend\.venv\install-ok-fr-en.txt"
 

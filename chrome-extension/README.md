@@ -34,7 +34,7 @@ python -m spacy download fr_core_news_md && python -m spacy download en_core_web
 python app.py
 ```
 
-Backend will start on `http://localhost:6677`
+Backend will start on `http://localhost:7000`
 
 ### 2. Install Chrome Extension
 
@@ -57,7 +57,7 @@ Backend will start on `http://localhost:6677`
 1. Click extension icon
 2. Click "🔧 Extension settings"
 3. Choose French or English from the language selector (French is the default)
-4. Enter backend URL (e.g., `http://localhost:6677`)
+4. Enter backend URL (e.g., `http://localhost:7000`)
 5. Click "🔍 Test connection" to verify
 6. Click "💾 Save" to save
 
@@ -182,7 +182,7 @@ No build step required - extension works directly from source.
 
 ### "Status: Offline"
 
-- Verify backend is running: `curl http://localhost:6677/api/health`
+- Verify backend is running: `curl http://localhost:7000/api/health`
 - Check backend URL in extension options
 - Check browser console for errors
 

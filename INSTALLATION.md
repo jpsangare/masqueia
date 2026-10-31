@@ -25,7 +25,7 @@ Guide complet pour installer l’extension Chrome et le backend.
 
 2. **Double-cliquez sur `Uruchom-Windows.bat`** — au premier lancement, tout est installé (y compris Python s’il est absent), puis le backend démarre et le tableau de bord s’ouvre
 
-3. **C’est prêt !** Le backend est disponible sur `http://localhost:6677`. Pour le démarrer à l’ouverture de session, double-cliquez sur `Autostart-Windows.bat`.
+3. **C’est prêt !** Le backend est disponible sur `http://localhost:7000`. Pour le démarrer à l’ouverture de session, double-cliquez sur `Autostart-Windows.bat`.
 
 ### macOS
 
@@ -40,7 +40,7 @@ Guide complet pour installer l’extension Chrome et le backend.
    ./install-mac.sh
    ```
 
-3. **C’est prêt !** Le backend démarre automatiquement sur `http://localhost:6677`.
+3. **C’est prêt !** Le backend démarre automatiquement sur `http://localhost:7000`.
 
 ### Linux
 
@@ -67,7 +67,7 @@ Guide complet pour installer l’extension Chrome et le backend.
    ./install-linux.sh
    ```
 
-4. **C’est prêt !** Le backend démarre automatiquement sur `http://localhost:6677`.
+4. **C’est prêt !** Le backend démarre automatiquement sur `http://localhost:7000`.
 
 ---
 
@@ -93,7 +93,7 @@ Guide complet pour installer l’extension Chrome et le backend.
 
 1. Cliquez sur l’**icône de l’extension** dans la barre d’outils Chrome.
 2. Cliquez sur **« 🔧 Paramètres de l’extension »**.
-3. Saisissez l’URL : `http://localhost:6677`
+3. Saisissez l’URL : `http://localhost:7000`
 4. Cliquez sur **« 🔍 Tester la connexion »**.
 5. Si le message « ✅ Connexion réussie ! » s’affiche, cliquez sur **« 💾 Enregistrer »**.
 
@@ -179,16 +179,16 @@ J’habite à [LIEU], au [LIEU].
 
 ### Le backend ne démarre pas
 
-**Problème :** erreur « Port 6677 is already in use »
+**Problème :** erreur « Port 7000 is already in use »
 
 **Solution :**
 ```bash
 # Windows
-netstat -ano | findstr :6677
+netstat -ano | findstr :7000
 taskkill /PID <numer_PID> /F
 
 # macOS/Linux
-lsof -i :6677
+lsof -i :7000
 kill -9 <PID>
 ```
 
@@ -196,13 +196,13 @@ kill -9 <PID>
 
 1. **Vérifiez que le backend est en cours d’exécution :**
    ```bash
-   curl http://localhost:6677/api/health
+   curl http://localhost:7000/api/health
    ```
    La réponse attendue est : `{"status":"healthy"}`
 
 2. **Vérifiez l’URL dans les paramètres de l’extension :**
    - Ouvrez les options de l’extension.
-   - Vérifiez que l’URL est `http://localhost:6677`.
+   - Vérifiez que l’URL est `http://localhost:7000`.
    - Cliquez sur « Tester la connexion ».
 
 3. **Redémarrez le backend :**

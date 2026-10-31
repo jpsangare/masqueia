@@ -7,7 +7,7 @@ Ce document fait référence pour l’orientation du projet. Mettez-le à jour �
 
 ## 1. État actuel (v1.4.0)
 
-- **Backend :** Flask + Microsoft Presidio 2.2.354 + spaCy `fr_core_news_md` + `en_core_web_md`, port **6677** (configurable via `PRESIDIO_PORT`), loopback uniquement (IPv4+IPv6), sans authentification (décision délibérée : service exclusivement local).
+- **Backend :** Flask + Microsoft Presidio 2.2.354 + spaCy `fr_core_news_md` + `en_core_web_md`, port **7000** (configurable via `PRESIDIO_PORT`), loopback uniquement (IPv4+IPv6), sans authentification (décision délibérée : service exclusivement local).
 - **Extension Chrome :** Manifest V3, trois mécanismes : anonymisation au collage (Ctrl+V, la méthode la plus fiable), raccourci Ctrl+Shift+A, interception du bouton « Envoyer ».
 - **Windows pour débutants :** `Uruchom-Windows.bat` (installation et démarrage en un clic, installation automatique de Python via winget), `Autostart-Windows.bat`, guide `WINDOWS.md`.
 - **Entités :** 28 types, priorité aux données polonaises (PESEL, NIP, REGON, carte d’identité, passeport) et aux données internationales.
@@ -88,7 +88,7 @@ Les fondations existent déjà dans le commit v2.0.0 abandonné (voir le point 2
 
 ### Règles impératives
 - **Ne jamais** committer des fichiers `*.pem`, `*.crx` ni des journaux contenant des PII.
-- Port par défaut **6677** — modifications uniquement via `PRESIDIO_PORT` et dans les options de l’extension.
+- Port par défaut **7000** — modifications uniquement via `PRESIDIO_PORT` et dans les options de l’extension.
 - Le backend écoute **uniquement sur loopback** — ne jamais utiliser `0.0.0.0` sans ajouter d’authentification.
 - Toute modification des motifs d’entités doit être suivie d’un benchmark précision/rappel (point 3.3).
 

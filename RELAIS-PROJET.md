@@ -5,7 +5,7 @@
 
 ## 1. Ce qu'est le projet
 
-Extension Chrome + backend Python local qui **anonymisent les données personnelles** lors d'un collage de texte (ChatGPT, Claude, Gmail…). Tout tourne en local : `http://localhost:6677`, aucune donnée ne sort de la machine.
+Extension Chrome + backend Python local qui **anonymisent les données personnelles** lors d'un collage de texte (ChatGPT, Claude, Gmail…). Tout tourne en local : `http://localhost:7000`, aucune donnée ne sort de la machine.
 
 - **Dépôt distant :** `https://github.com/jpsangare/masqueia` (remote `origin` déjà basculé de `gacabartosz` vers `jpsangare`).
 - **Langues NLP :** français + anglais (le polonais a été remplacé — voir §4).
@@ -59,7 +59,7 @@ fonctionnement.html  Page vitrine FR expliquant le produit
 - **`/api/config` en liste** ne modifie que les entités existantes ; le **format dict** permet d'en ajouter.
 - **Corpus `known_issue`** : le test échoue *exprès* si un cas marqué se met à passer → retirer l'annotation.
 - **`anonymization_logs`** conserve le texte original en mémoire (100 entrées) — point de vigilance vie privée non traité.
-- Backend sans authentification sur 6677 (loopback seul, décision assumée).
+- Backend sans authentification sur 7000 (loopback seul, décision assumée).
 
 ## 6. Tests
 
@@ -96,5 +96,5 @@ python -m pytest -k api     :: ciblé
 ```powershell
 git status                                  # état du working tree (tout est non commité)
 python -m pytest -q                         # suite verte attendue
-curl http://localhost:6677/api/health       # analyzer_ready: true si backend lancé
+curl http://localhost:7000/api/health       # analyzer_ready: true si backend lancé
 ```

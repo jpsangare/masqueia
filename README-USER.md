@@ -43,7 +43,7 @@
 - Bouton « Effacer les journaux ».
 
 **Pour les consulter :**
-1. Ouvrez http://localhost:6677/dashboard.
+1. Ouvrez http://localhost:7000/dashboard.
 2. Cliquez sur « Journaux » dans le menu (icône de document).
 3. Consultez l’historique d’anonymisation.
 
@@ -131,7 +131,7 @@ open test-extension.html
 ### Étape 7 : Consulter les journaux du tableau de bord
 
 ```
-1. Ouvrez http://localhost:6677/dashboard.
+1. Ouvrez http://localhost:7000/dashboard.
 2. Cliquez sur « Journaux » dans le menu (4e élément, icône de document).
 3. Vérifiez que l’historique d’anonymisation s’affiche.
 4. Consultez le texte original et le texte anonymisé.
@@ -209,7 +209,7 @@ open /Users/gaca/masqueia/test-extension.html
 
 **1. Vérifiez le backend :**
 ```bash
-curl http://localhost:6677/api/health
+curl http://localhost:7000/api/health
 ```
 
 S’il ne fonctionne pas :
@@ -259,7 +259,7 @@ python app.py
 5. ✅ Testez sur ChatGPT (Ctrl+V).
 6. ✅ Testez sur Claude (Ctrl+V).
 7. ✅ Testez sur Perplexity (Ctrl+V).
-8. ✅ Consultez les journaux (http://localhost:6677/dashboard → Logs).
+8. ✅ Consultez les journaux (http://localhost:7000/dashboard → Logs).
 
 ---
 
@@ -302,7 +302,7 @@ Consultez :
 1. **AI-SITES-GUIDE.md** - utilisation sur les différents sites d’IA.
 2. **TESTING.md** - tests et débogage.
 3. Les journaux dans les DevTools (F12).
-4. L’état du backend : `curl http://localhost:6677/api/health`
+4. L’état du backend : `curl http://localhost:7000/api/health`
 
 ---
 

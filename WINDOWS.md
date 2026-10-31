@@ -72,6 +72,6 @@ Vous souhaitez que le programme démarre automatiquement à l’ouverture de vot
 | La fenêtre apparaît puis disparaît | Cliquez une nouvelle fois sur le fichier. Si le problème persiste, redémarrez l’ordinateur et réessayez. |
 | L’installation de Python a échoué | Accédez à https://www.python.org/downloads/, téléchargez Python et **cochez « Add Python to PATH »** lors de l’installation, puis relancez `Uruchom-Windows`. |
 | Le texte n’est pas masqué | Cliquez sur l’icône de l’extension et vérifiez que le bouton est ACTIVÉ ; actualisez la page (F5). |
-| Je veux voir ce qui a été masqué | Ouvrez http://localhost:6677/dashboard → onglet « Logs ». |
+| Je veux voir ce qui a été masqué | Ouvrez http://localhost:7000/dashboard → onglet « Logs ». |
 
 Pour obtenir davantage d’aide : [Guide pour tous.md](Guide%20pour%20tous.md) • [INSTALLATION.md](INSTALLATION.md)

@@ -21,10 +21,10 @@
 ### 3. Vérifiez que le backend fonctionne
 ```bash
 # Test 1: Health check
-curl http://localhost:6677/api/health
+curl http://localhost:7000/api/health
 
 # Test 2 : anonymisation
-curl -X POST http://localhost:6677/api/anonymize \
+curl -X POST http://localhost:7000/api/anonymize \
   -H "Content-Type: application/json" \
   -d '{"text":"Jan Kowalski, email: jan@example.com, tel: 123456789"}'
 ```
@@ -126,7 +126,7 @@ L’extension devrait fonctionner sur TOUS les sites (<all_urls>), notamment :
 
 1. **Le backend ne fonctionne pas :**
    ```bash
-   curl http://localhost:6677/api/health
+   curl http://localhost:7000/api/health
    # S’il ne fonctionne pas : démarrez le backend
    cd /Users/gaca/masqueia/backend
    source .venv/bin/activate
@@ -136,7 +136,7 @@ L’extension devrait fonctionner sur TOUS les sites (<all_urls>), notamment :
 2. **URL du backend incorrecte :**
    - Ouvrez la fenêtre contextuelle de l’extension.
    - Cliquez sur « Paramètres ».
-   - Vérifiez que l’URL est `http://localhost:6677`.
+   - Vérifiez que l’URL est `http://localhost:7000`.
 
 3. **Erreur CORS :**
    - Consultez la background service worker console.
@@ -205,8 +205,8 @@ chrome.storage.local.get(['extensionEnabled'], (result) => {
 
 **Background Service Worker:**
 ```
-[Presidio Background] Backend URL: http://localhost:6677
-[Presidio Background] Sending request to: http://localhost:6677/api/anonymize
+[Presidio Background] Backend URL: http://localhost:7000
+[Presidio Background] Sending request to: http://localhost:7000/api/anonymize
 [Presidio Background] Response status: 200
 [Presidio Background] Anonymization successful: [PERSONNE] tel [TELEPHONE]
 ```
@@ -235,7 +235,7 @@ chrome.storage.local.get(['extensionEnabled'], (result) => {
 
 **CORS error:**
 ```
-Access to fetch at 'http://localhost:6677/api/anonymize' from origin 'chrome-extension://...' has been blocked by CORS policy
+Access to fetch at 'http://localhost:7000/api/anonymize' from origin 'chrome-extension://...' has been blocked by CORS policy
 ```
 → Vérifiez que la configuration CORS du backend est correcte.
 

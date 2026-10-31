@@ -95,7 +95,7 @@ Le backend est le programme qui détecte et masque les données personnelles.
    ./install-mac.sh
    ```
    - Patientez 5 à 10 minutes.
-   - Lorsque le backend est lancé sur `http://localhost:6677`, il **FONCTIONNE !** ✅
+   - Lorsque le backend est lancé sur `http://localhost:7000`, il **FONCTIONNE !** ✅
 
 ### Linux (Ubuntu/Debian)
 
@@ -110,7 +110,7 @@ Le backend est le programme qui détecte et masque les données personnelles.
    ./install-linux.sh
    ```
    - Patientez 5 à 10 minutes.
-   - Lorsque le backend est lancé sur `http://localhost:6677`, il **FONCTIONNE !** ✅
+   - Lorsque le backend est lancé sur `http://localhost:7000`, il **FONCTIONNE !** ✅
 
 ---
 
@@ -178,7 +178,7 @@ Le backend est le programme qui détecte et masque les données personnelles.
 
 Vous pouvez consulter l’activité de l’extension :
 
-1. Ouvrez cette adresse dans le navigateur : http://localhost:6677/dashboard
+1. Ouvrez cette adresse dans le navigateur : http://localhost:7000/dashboard
 
 2. Vous y trouverez :
    - ✅ L’état du service (en ligne/hors ligne).
@@ -271,7 +271,7 @@ Vous pouvez consulter l’activité de l’extension :
 
 **Où trouver de l’aide ?**
 
-1. **Consultez le tableau de bord :** http://localhost:6677/dashboard
+1. **Consultez le tableau de bord :** http://localhost:7000/dashboard
    - Consultez les journaux pour voir ce qui se passe.
 
 2. **Issues GitHub :** https://github.com/jpsangare/masqueia/issues
@@ -327,7 +327,7 @@ cd masqueia
    - Vert = active ; rouge = désactivée.
 
 3. **Consultez les journaux du tableau de bord.**
-   - http://localhost:6677/dashboard → Logs
+   - http://localhost:7000/dashboard → Logs
    - Découvrez ce qui a été détecté et masqué.
 
 4. **Ne fermez pas le terminal !**

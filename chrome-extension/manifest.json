@@ -17,8 +17,8 @@
     "default_path": "app.html"
   },
   "host_permissions": [
-    "http://localhost:6677/*",
-    "http://127.0.0.1:6677/*"
+    "http://localhost:7000/*",
+    "http://127.0.0.1:7000/*"
   ],
   "action": {
     "default_icon": {

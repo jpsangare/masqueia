@@ -202,7 +202,7 @@ APRÈS COLLAGE (anonymisation automatique) :
 
 ❌ En cas de problème :
 - « Erreur d’anonymisation. Je colle le texte original. »
-- Vérifiez que le backend fonctionne : http://localhost:6677
+- Vérifiez que le backend fonctionne : http://localhost:7000
 ```
 
 ---
@@ -214,7 +214,7 @@ APRÈS COLLAGE (anonymisation automatique) :
 **Solution :**
 1. Vérifiez que le backend fonctionne :
    ```bash
-   curl http://localhost:6677/api/health
+   curl http://localhost:7000/api/health
    ```
 2. S’il ne fonctionne pas, démarrez-le :
    ```bash
@@ -307,7 +307,7 @@ APRÈS COLLAGE (anonymisation automatique) :
 
 **Backend Health Check :**
 ```bash
-curl http://localhost:6677/api/health
+curl http://localhost:7000/api/health
 ```
 
 La réponse attendue est :

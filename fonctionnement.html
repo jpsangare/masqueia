@@ -62,7 +62,7 @@
   <h2>⚙️ <span>Comment ça marche</span> ?</h2>
   <div class="flow">
     <div class="step"><h3>Vous collez</h3><p>L’extension Chrome détecte le collage ou l’envoi de texte dans une page web.</p></div>
-    <div class="step"><h3>Envoi au backend local</h3><p>Le texte est transmis à <code>localhost:6677</code>, sur votre propre machine.</p></div>
+    <div class="step"><h3>Envoi au backend local</h3><p>Le texte est transmis à <code>localhost:7000</code>, sur votre propre machine.</p></div>
     <div class="step"><h3>Analyse Presidio</h3><p>Microsoft Presidio et spaCy repèrent noms, e-mails, téléphones, IBAN, numéros d’identité…</p></div>
     <div class="step"><h3>Anonymisation</h3><p>Chaque donnée sensible est remplacée par une étiquette, par exemple <code>[PERSONNE]</code>.</p></div>
     <div class="step"><h3>Texte sécurisé</h3><p>Le texte anonymisé remplace l’original dans le champ de saisie.</p></div>
@@ -71,7 +71,7 @@
   <h2>🧩 <span>Les composants</span></h2>
   <div class="grid">
     <div class="box"><h3>🌐 Extension Chrome</h3><p>Intercepte le texte dans les pages, affiche la fenêtre d’options et le popup, et gère la langue (français par défaut, anglais disponible).</p></div>
-    <div class="box"><h3>🐍 Backend Python (Flask)</h3><p>Moteur local exposé sur le port 6677 : analyse le texte avec Presidio et renvoie la version anonymisée.</p></div>
+    <div class="box"><h3>🐍 Backend Python (Flask)</h3><p>Moteur local exposé sur le port 7000 : analyse le texte avec Presidio et renvoie la version anonymisée.</p></div>
     <div class="box"><h3>📊 Tableau de bord</h3><p>Interface web pour tester l’anonymisation, ajuster les types de données détectées et consulter les statistiques.</p></div>
     <div class="box"><h3>📦 Installateurs</h3><p>Scripts pour Windows, macOS et Linux qui installent Python, les dépendances et le modèle linguistique.</p></div>
   </div>
@@ -88,7 +88,7 @@
     <p><strong>1.</strong> Téléchargez le projet et lancez l’installateur (Windows : double-clic sur <code>Uruchom-Windows.bat</code>).</p>
     <p><strong>2.</strong> Dans Chrome, ouvrez <code>chrome://extensions/</code>, activez le mode développeur, puis « Charger l’extension non empaquetée » et choisissez le dossier <code>chrome-extension</code>.</p>
     <p><strong>3.</strong> Vérifiez que le backend répond :</p>
-<pre>curl http://localhost:6677/health</pre>
+<pre>curl http://localhost:7000/health</pre>
     <p>Collez ensuite un texte contenant des données personnelles dans ChatGPT : elles sont masquées. ✅</p>
   </div>
 
