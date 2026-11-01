@@ -38,6 +38,10 @@ def _extension_id() -> str:
 
 
 EXTENSION_ORIGIN = f'chrome-extension://{_extension_id()}'
+# Version du Chrome Web Store : le Store attribue son propre ID (le paquet envoyé n'a pas de « key »).
+# À renseigner une fois l'article créé dans la console développeur (32 lettres a-p).
+STORE_EXTENSION_ID = ''
+EXTENSION_ORIGINS = {EXTENSION_ORIGIN} | ({f'chrome-extension://{STORE_EXTENSION_ID}'} if STORE_EXTENSION_ID else set())
 LOCAL_HOSTS = {f'localhost:{PORT}', f'127.0.0.1:{PORT}', f'[::1]:{PORT}'}
 LOCAL_ORIGINS = {f'http://{host}' for host in LOCAL_HOSTS}
 
@@ -70,7 +74,7 @@ from api.setup import setup_bp
 app = Flask(__name__, static_folder='../chrome-extension' if DEV_MODE else None, static_url_path='')
 app.config['JSON_AS_ASCII'] = False  # Support for accented characters (French, Polish, etc.)
 
-CORS(app, resources={r"/api/*": {"origins": [EXTENSION_ORIGIN, *(LOCAL_ORIGINS if DEV_MODE else [])]}})
+CORS(app, resources={r"/api/*": {"origins": [*EXTENSION_ORIGINS, *(LOCAL_ORIGINS if DEV_MODE else [])]}})
 
 
 @app.before_request
@@ -86,7 +90,7 @@ def restrict_to_masqueia():
     if not request.path.startswith('/api/') or request.path == '/api/health':
         return None
     origin = request.headers.get('Origin')
-    if origin == EXTENSION_ORIGIN:
+    if origin in EXTENSION_ORIGINS:
         return None
     # GET de l'extension : Chrome n'y met pas d'Origin (hôte autorisé dans le manifeste).
     # L'en-tête X-MasqueIA déclenche une vérification CORS préalable qu'aucun site n'obtient.

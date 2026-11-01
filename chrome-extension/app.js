@@ -671,10 +671,11 @@ async function loadSettings() {
       entityMeta = {};
       data.entities.forEach(e => {
         entitySettings[e.name] = e.enabled;
-        entityMeta[e.name] = { description: e.description || '', mask: e.mask || `[${e.name}]` };
+        entityMeta[e.name] = { description: e.description || '', mask: e.mask || `[${e.name}]`, team: !!e.team };
       });
     }
 
+    renderTeam(data.team);
     renderSettings();
   } catch (err) {
     document.getElementById('settings-container').innerHTML = `<p>${t('settings_error')}</p>`;
@@ -926,7 +927,7 @@ function renderSettings() {
       html += `
         <div class="entity-card ${enabled ? 'enabled' : ''}" data-action="toggleEntity" data-arg="${entity.name}">
           <div class="entity-card-header">
-            <div class="entity-name">${displayName}</div>
+            <div class="entity-name">${displayName}${teamBadge(entity.name)}</div>
             <div class="toggle-switch ${enabled ? 'enabled' : ''}">
               <div class="toggle-knob"></div>
             </div>
@@ -965,7 +966,7 @@ function renderCustomEntities(knownNames) {
     html += `
       <div class="entity-card ${enabled ? 'enabled' : ''}" data-action="toggleEntity" data-arg="${name}">
         <div class="entity-card-header">
-          <div class="entity-name">${escapeHtml(name)}</div>
+          <div class="entity-name">${escapeHtml(name)}${teamBadge(name)}</div>
           <div class="toggle-switch ${enabled ? 'enabled' : ''}">
             <div class="toggle-knob"></div>
           </div>
@@ -1126,6 +1127,60 @@ async function exportFormulas() {
   }
 }
 
+const TEAM_STATUS = {
+  ok: '✅ Appliquée',
+  cache: '⚠️ Fichier inaccessible : dernière copie utilisée',
+  error: '❌ Fichier inaccessible, aucune copie disponible',
+};
+
+function renderTeam(team) {
+  const status = document.getElementById('team-status');
+  const input = document.getElementById('team-source');
+  if (!team || team.status === 'none') {
+    status.textContent = 'Aucune configuration d’équipe : seuls vos réglages locaux s’appliquent.';
+  } else {
+    const loaded = team.loaded_at ? ` (lue le ${new Date(team.loaded_at).toLocaleString()})` : '';
+    const message = team.message ? ` — ${team.message}` : '';
+    status.textContent = `${TEAM_STATUS[team.status]} : ${team.entities} entité(s)${loaded}${message}`;
+  }
+  input.value = team?.source || '';
+  // Source imposée par l'administrateur (variable MASQUEIA_TEAM_CONFIG)
+  const locked = !!team?.from_env;
+  input.disabled = locked;
+  document.querySelectorAll('[data-action="setTeamConfig"], [data-action="removeTeamConfig"]')
+    .forEach(btn => { btn.disabled = locked; });
+  if (locked) status.textContent += ' — définie par votre administrateur.';
+}
+
+async function applyTeamSource(source) {
+  try {
+    await engineJson('/config/team', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ source })
+    });
+    await engineJson('/reload', { method: 'POST' });
+    await loadSettings();
+    notify(source ? '✅ Configuration d’équipe appliquée.' : 'Configuration d’équipe retirée.', 'success');
+  } catch (err) {
+    notify('❌ ' + err.message, 'error');
+  }
+}
+
+function setTeamConfig() {
+  const source = document.getElementById('team-source').value.trim();
+  if (!source) {
+    notify('Indiquez le chemin du fichier d’équipe (.xlsx ou .yaml).', 'error');
+    return;
+  }
+  applyTeamSource(source);
+}
+
+async function removeTeamConfig() {
+  if (!await askConfirm('Retirer la configuration d’équipe ? Vos réglages locaux s’appliqueront seuls.', 'Retirer')) return;
+  applyTeamSource('');
+}
+
 function chooseFormulasFile() {
   document.getElementById('formulas-input').click();
 }
@@ -1142,7 +1197,9 @@ async function importFormulas(file) {
     await engineJson('/reload', { method: 'POST' });
     await loadSettings();
     const added = result.added.length ? `\nNouvelles entités : ${result.added.join(', ')}` : '';
-    notify(`✅ ${result.imported} entité(s) et ${result.patterns} motif(s) importés et actifs.${added}`, 'success');
+    const team = result.overridden_by_team.length
+      ? `\nToujours définies par l’équipe : ${result.overridden_by_team.join(', ')}` : '';
+    notify(`✅ ${result.imported} entité(s) et ${result.patterns} motif(s) importés et actifs.${added}${team}`, 'success');
   } catch (err) {
     notify('❌ Import impossible : ' + err.message, 'error');
   }
@@ -1154,7 +1211,15 @@ document.getElementById('formulas-input').addEventListener('change', (event) => 
   if (file) importFormulas(file);
 });
 
+function teamBadge(name) {
+  return entityMeta[name]?.team ? ' <span title="Géré par la configuration d’équipe">🔒</span>' : '';
+}
+
 function toggleEntity(name) {
+  if (entityMeta[name]?.team) {
+    notify('🔒 Cette donnée est gérée par la configuration d’équipe.', 'error');
+    return;
+  }
   entitySettings[name] = !entitySettings[name];
   renderSettings();
 }

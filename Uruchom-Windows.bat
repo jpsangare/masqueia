@@ -119,15 +119,13 @@ REM ---------- 3. Démarrage du backend et ouverture du tableau de bord --------
 :run_backend
 echo ============================================================
 echo  DÉMARRAGE DU BACKEND sur http://localhost:%PORT%
-echo  Le tableau de bord va s’ouvrir automatiquement dans le navigateur.
+echo  Les réglages sont dans le panneau latéral de l’extension.
 echo.
 echo  NE FERMEZ PAS CETTE FENÊTRE pendant l’utilisation de l’anonymisation !
 echo  (Vous pouvez la réduire.)
 echo  Pour arrêter le backend : fermez la fenêtre ou appuyez sur Ctrl+C
 echo ============================================================
 echo.
-
-start "" /min cmd /c "timeout /t 8 /nobreak >nul & start "" http://localhost:%PORT%/dashboard"
 
 cd /d "%~dp0backend"
 "%VENV_PY%" app.py

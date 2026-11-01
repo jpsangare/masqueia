@@ -66,18 +66,15 @@ def isolated_store(anonymize_module, tmp_path, monkeypatch):
 
 @pytest.fixture
 def temp_config(tmp_path, monkeypatch):
-    """Copie de entities.yaml pour ne jamais modifier la vraie configuration.
-
-    Les deux modules qui lisent le fichier (api.config pour l’endpoint,
-    core.analyzer pour le rechargement de l’analyseur) sont redirigés.
-    """
-    import api.config as config_api
-    import core.analyzer as analyzer_core
+    """Copie de entities.yaml et dossier de données temporaire :
+    la vraie configuration (locale et d’équipe) n’est jamais modifiée."""
+    from core import config_store
 
     copy = tmp_path / "entities.yaml"
-    shutil.copy(analyzer_core.CONFIG_PATH, copy)
-    monkeypatch.setattr(config_api, "CONFIG_PATH", copy)
-    monkeypatch.setattr(analyzer_core, "CONFIG_PATH", copy)
+    shutil.copy(config_store.CONFIG_PATH, copy)
+    monkeypatch.setattr(config_store, "CONFIG_PATH", copy)
+    monkeypatch.setattr(config_store, "DATA_DIR", tmp_path / "data")
+    monkeypatch.delenv(config_store.TEAM_ENV, raising=False)
     return copy
 
 

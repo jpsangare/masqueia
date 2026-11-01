@@ -5,8 +5,6 @@ Configure les moteurs NLP pour le français et l'anglais et ajoute des recognize
 
 import os
 import re
-import yaml
-from pathlib import Path
 from typing import Dict, Any
 import logging
 
@@ -16,6 +14,8 @@ from presidio_analyzer import RecognizerResult
 from presidio_analyzer.entity_recognizer import EntityRecognizer
 from presidio_analyzer.predefined_recognizers import CreditCardRecognizer
 
+from core.config_store import effective_config
+
 logger = logging.getLogger("app.analyzer")
 
 SPACY_MODELS = {
@@ -24,7 +24,6 @@ SPACY_MODELS = {
 }
 SUPPORTED_LANGUAGES = list(SPACY_MODELS.keys())
 
-CONFIG_PATH = Path(__file__).parent.parent / "config" / "entities.yaml"
 
 
 def missing_spacy_models() -> list[str]:
@@ -40,17 +39,11 @@ def build_analyzer() -> tuple[AnalyzerEngine, Dict[str, Any]]:
     Returns:
         tuple: (analyzer, config) - analyseur configuré et configuration chargée
     """
-    # Rechercher le chemin du fichier de configuration
-    config_path = CONFIG_PATH
-
-    if not config_path.exists():
-        raise FileNotFoundError(f"Fichier de configuration introuvable : {config_path}")
-
-    # Charger la configuration
-    with open(config_path, 'r', encoding='utf-8') as f:
-        config = yaml.safe_load(f)
-
-    logger.info(f"Configuration chargée depuis : {config_path}")
+    # Configuration locale complétée par la configuration d'équipe
+    config, team = effective_config()
+    if team["status"] != "none":
+        logger.info("Configuration d'équipe (%s) : %d entité(s), état %s",
+                    team["source"], len(team["entities"]), team["status"])
 
     # Configuration des modèles SpaCy pour le français et l'anglais
     nlp_configuration = {

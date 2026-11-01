@@ -731,6 +731,21 @@
         </div>
       </div>
 
+      <div class="card">
+        <h2>👥 Configuration d’équipe</h2>
+        <p class="card-hint">
+          Fichier commun à l’équipe (.xlsx exporté ci-dessus ou .yaml), par exemple sur un partage réseau :
+          ses entités et son seuil s’imposent à vos réglages locaux. Une copie est gardée pour travailler hors réseau.
+        </p>
+        <div class="btn-row" style="flex-wrap:nowrap;">
+          <input id="team-source" type="text" style="flex:1;min-width:0;"
+                 placeholder="\\serveur\partage\masqueia-equipe.xlsx" aria-label="Chemin du fichier d’équipe">
+          <button class="btn btn-primary btn-sm" data-action="setTeamConfig">Appliquer</button>
+          <button class="btn btn-secondary btn-sm" data-action="removeTeamConfig">Retirer</button>
+        </div>
+        <p class="card-hint" id="team-status" style="margin:8px 0 0;" aria-live="polite"></p>
+      </div>
+
       <div id="settings-container">
         <p class="card">Chargement des paramètres...</p>
       </div>

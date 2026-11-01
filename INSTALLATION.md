@@ -23,9 +23,11 @@ Guide complet pour installer l’extension Chrome et le backend.
    cd masqueia
    ```
 
-2. **Double-cliquez sur `Uruchom-Windows.bat`** — au premier lancement, tout est installé (y compris Python s’il est absent), puis le backend démarre et le tableau de bord s’ouvre
+2. **Double-cliquez sur `Installer-MasqueIA.bat`** : Python (si absent), les bibliothèques et les modèles sont installés, puis le moteur démarre et démarrera à chaque ouverture de session. La page des extensions du navigateur s’ouvre ensuite, avec le chemin du dossier de l’extension déjà copié.
 
-3. **C’est prêt !** Le backend est disponible sur `http://localhost:7000`. Pour le démarrer à l’ouverture de session, double-cliquez sur `Autostart-Windows.bat`.
+3. **Chargez l’extension** : activez le « Mode développeur », cliquez sur « Charger l’extension non empaquetée » et collez le chemin. Le moteur répond sur `http://localhost:7000`.
+
+> 👥 **En équipe :** voir [EQUIPES.md](EQUIPES.md) pour partager une configuration commune.
 
 ### macOS
 

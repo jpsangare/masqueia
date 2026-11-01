@@ -45,6 +45,15 @@ class TestOriginRestriction:
     def test_web_page_origin_is_refused_even_with_header(self, client):
         assert self.get_config(client, {"Origin": "https://evil.example", "X-MasqueIA": "1"}) == 403
 
+    def test_store_version_is_accepted_once_its_id_is_set(self, client, app_module, monkeypatch):
+        store = "chrome-extension://" + "p" * 32
+        assert self.get_config(client, {"Origin": store}) == 403
+        monkeypatch.setattr(app_module, "EXTENSION_ORIGINS", app_module.EXTENSION_ORIGINS | {store})
+        assert self.get_config(client, {"Origin": store}) == 200
+
+    def test_other_extensions_are_refused(self, client):
+        assert self.get_config(client, {"Origin": "chrome-extension://" + "a" * 32}) == 403
+
 
 def test_unknown_endpoint_returns_json_404(client):
     response = client.get("/api/does-not-exist")
